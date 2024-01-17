@@ -80,6 +80,10 @@ int process_instruction(const char *opcode, char *arg, stack_t **stack, unsigned
 		{"swap", m_swap},
 		{"add", m_add},
 		{"nop", m_nop},
+		{"sub", m_sub},
+		{"div", m_div},
+		{"mul", m_mul},
+		{"mod", m_mod},
 		{NULL, NULL}
 	};
 	while (instructions[i].opcode != NULL)
