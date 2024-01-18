@@ -10,7 +10,7 @@ void m_mod(stack_t **stack, unsigned int line_number)
 {
 	stack_t *first, *second;
 	int remainder;
-	
+
 	if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
 	{
 		fprintf(stderr, "L%d: can't sub, stack too short", line_number);

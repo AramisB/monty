@@ -1,6 +1,8 @@
 #include "monty.h"
 /**
  * main - checks the code
+ * @argv: number of arguments
+ * @argc: argument type
  *
  * Return: always 0 on success
  */
@@ -15,7 +17,7 @@ int main(int argc, char *argv[])
 		exit(EXIT_FAILURE);
 	}
 	file = fopen(argv[1], "r");
-	
+
 	if (file == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
@@ -35,18 +37,19 @@ int main(int argc, char *argv[])
  * @file: pointer to file
  * @stack: double pointer to the first element in the stack
  *
+ * Return: 0 always
  */
 int process_file(FILE *file, stack_t **stack)
 {
 	char line[BUFFER_SIZE];
 	char *opcode, *arg;
 	unsigned int line_number = 0;
-	
+
 	while (read_line(line, BUFFER_SIZE, file) != -1)
 	{
 		line_number++;
 		opcode = strtok(line, " \t\n");
-	
+
 		if (opcode == NULL)
 		{
 			continue;
