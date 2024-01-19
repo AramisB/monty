@@ -18,6 +18,12 @@ void m_mod(stack_t **stack, unsigned int line_number)
 	}
 	first = *stack;
 	second = (*stack)->next;
+
+	if (first->n == 0)
+	{
+		fprintf(stderr, "L%d: division by zero\n", line_number);
+		exit(EXIT_FAILURE);
+	}
 	remainder  = second->n % first->n;
 	m_pop(stack, line_number);
 	(*stack)->n = remainder;
