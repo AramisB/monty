@@ -3,6 +3,7 @@
  * m_pall - a function that prints all the elements of a stack
  * starting at the top
  *
+ * @line_number: line number in the file 
  * @stack: double pointer to the top of the stack
  *
  */
@@ -47,7 +48,7 @@ int is_int(char *string)
 }
 
 /**
- * m-push - a function that pushes the element to the stack
+ * m_push - a function that pushes the element to the stack
  *
  * @stack: a double pointer to the top of the stack
  * @line_number: line number in the script

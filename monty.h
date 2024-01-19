@@ -40,8 +40,8 @@ typedef struct instruction_s
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 int process_file(FILE *file, stack_t **stack);
-int process_instruction(const char *opcode, char *arg, stack_t **stack, unsigned int line_number);
-void error_exit(const char *message, stack_t *stack, FILE *file);
+int p_inst(const char *opcode, char *arg, stack_t **stack, unsigned int l_no);
+void error_exit(stack_t *stack, FILE *file);
 ssize_t read_line(char *buffer, size_t size, FILE *stream);
 void free_stack(stack_t *stack);
 void m_push(stack_t **stack, unsigned int line_number, char *arg);

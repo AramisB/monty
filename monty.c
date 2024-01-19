@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
 	}
 	if (process_file(file, &stack) != 0)
 	{
-		error_exit("Error occurred while processing file", stack, file);
+		error_exit(stack, file);
 	}
 	fclose(file);
 	free_stack(stack);
@@ -55,7 +55,7 @@ int process_file(FILE *file, stack_t **stack)
 			continue;
 		}
 		arg = strtok(NULL, " \t\n");
-		if (process_instruction(opcode, arg, stack, line_number) != 0)
+		if (p_inst(opcode, arg, stack, line_number) != 0)
 		{
 			return (-1);
 		}
@@ -63,16 +63,16 @@ int process_file(FILE *file, stack_t **stack)
 	return (0);
 }
 /**
- * process_instruction - processes a single instrction
+ * p_inst - processes a single instrction
  *
  * @opcode: pointer to the opcode
  * @arg: pointer to the argument
  * @stack: double pointer to the first element in the stack
- * @line_number: lne number in the file
+ * @l_no: lne number in the file
  *
  * Return: 0 on success
  */
-int process_instruction(const char *opcode, char *arg, stack_t **stack, unsigned int line_number)
+int p_inst(const char *opcode, char *arg, stack_t **stack, unsigned int l_no)
 {
 	int i = 0, found = 0;
 	instruction_t instructions[] = {
@@ -95,11 +95,11 @@ int process_instruction(const char *opcode, char *arg, stack_t **stack, unsigned
 		{
 			if (strcmp(opcode, "push") == 0)
 			{
-				m_push(stack, line_number, arg);
+				m_push(stack, l_no, arg);
 			}
 			else
 			{
-				instructions[i].f(stack, line_number);
+				instructions[i].f(stack, l_no);
 			}
 			found = 1;
 			break;
@@ -108,7 +108,7 @@ int process_instruction(const char *opcode, char *arg, stack_t **stack, unsigned
 	}
 	if (!found)
 	{
-		fprintf(stderr, "L%d: unknown instruction %s\n", line_number, opcode);
+		fprintf(stderr, "L%d: unknown instruction %s\n", l_no, opcode);
 		return (-1);
 	}
 	return (0);
@@ -116,14 +116,12 @@ int process_instruction(const char *opcode, char *arg, stack_t **stack, unsigned
 /**
  * error_exit - handles exit errors
  *
- * @message: pointer to the error message
  * @stack: double pointer to the first element in the stack
  * @file: pointer to the file
  *
  */
-void error_exit(const char *message, stack_t *stack, FILE *file)
+void error_exit(stack_t *stack, FILE *file)
 {
-	fprintf(stderr, "%s\n", message);
 	if (file != NULL)
 	{
 		fclose(file);
