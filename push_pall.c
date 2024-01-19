@@ -3,7 +3,7 @@
  * m_pall - a function that prints all the elements of a stack
  * starting at the top
  *
- * @line_number: line number in the file 
+ * @line_number: line number in the file
  * @stack: double pointer to the top of the stack
  *
  */
